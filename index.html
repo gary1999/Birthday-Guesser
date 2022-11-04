@@ -1,46 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Guess</title>
 
-    
-    <!-- <link rel="stylesheet" href="styles.css"> -->
-    <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script> 
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Birthday Guesser</title>
 
-</head>
-<body>
 
-    <div id="title">
-        <h1>TRASH BIRTHDAY GUESSER</h1>
-        <h2 id="guesses-made">Total Guesses: <span id="counter"></span></h2>
-        <div id=button-container>
+        <!-- <link rel="stylesheet" href="styles.css"> -->
+        <link rel="stylesheet" href="styles.css">
+        <script src="scripts.js" defer></script>
 
-            <button type="button" id="reset-button">Reset</button>
-            <button type="button" id="undo-button" disabled>Undo</button>
-        </div>
-        
-    </div>
+    </head>
 
-    
-    <div id="content">
-        <div id="content-container">
+    <body>
 
-            <button type="button" id="before-button">Before</button> 
-            <div id="birthdayGuess"></div>
-            <button type="button" id="after-button">After</button> 
-        
-        </div>
-    </div>
+        <div id="title">
+            <h1>BIRTHDAY GUESSER</h1>
+            <h2>(But you have to tell it how close you are)</h2>
+            <h2 id="guesses-made">Total Guesses: <span id="counter"></span></h2>
+            <div id=button-container>
 
-    <div id="previous-content">
-        <h2>Previous Guesses:</h2>
-        <div id="previous-guess-list">
+                <button type="button" id="reset-button" disabled>Reset</button>
+                <button type="button" id="undo-button" disabled>Undo</button>
+            </div>
 
         </div>
-    </div>
-</body>
+
+
+        <div id="content">
+            <div id="content-container">
+
+                <button type="button" id="before-button">Before</button>
+                <div id="birthdayGuess"></div>
+                <button type="button" id="after-button">After</button>
+
+            </div>
+        </div>
+
+        <div id="previous-content">
+            <h2>Previous Guesses:</h2>
+            <div id="previous-guess-list">
+
+            </div>
+        </div>
+    </body>
+
 </html>

@@ -13,13 +13,14 @@
     align-items: center;
     justify-content: center;
     margin: 20px;
+    padding-top: 40px;
 }
 
 #title h2 {
     margin: 10px;
 }
 
-#title button{
+#title button {
     margin: 20px;
     height: 25px;
     width: 60px;
@@ -31,14 +32,14 @@
     justify-content: space-around;
 }
 
-#content-container button{
+#content-container button {
 
     width: 60px;
     height: 25px;
 
 }
 
-#previous-content h2{
+#previous-content h2 {
     display: flex;
     align-items: center;
     justify-content: center;
