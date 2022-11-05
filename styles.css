@@ -6,6 +6,7 @@
     text-decoration: none;
     scroll-behavior: smooth;
     color: white;
+    font-family: Comic Sans MS, Comic Sans, cursive;
 }
 
 body {
@@ -16,8 +17,9 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+    padding: 1rem 2rem;
     background-color: black;
+    /* border-radius: 1rem; */
 }
 
 button:hover {
@@ -43,6 +45,11 @@ button:hover {
     width: 60px;
 }
 
+#button-container {
+    display: flex;
+    flex-direction: row;
+}
+
 #content-container {
     display: flex;
     align-items: center;
@@ -54,6 +61,22 @@ button:hover {
     width: 60px;
     height: 25px;
 
+}
+
+.guess-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.guess-display {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-style: 2px solid red; */
+    border: dashed red;
 }
 
 #previous-content h2 {
@@ -71,8 +94,8 @@ button:hover {
     margin-top: 10px;
 }
 
-#button-container {
+/* #button-container {
     display: flex;
     align-items: center;
     justify-content: center;
-}
+} */
