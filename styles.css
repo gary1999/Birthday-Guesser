@@ -48,12 +48,14 @@ button:hover {
 #button-container {
     display: flex;
     flex-direction: row;
+
 }
 
 #content-container {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    padding: 0 20rem;
 }
 
 #content-container button {
@@ -77,6 +79,9 @@ button:hover {
     justify-content: center;
     /* border-style: 2px solid red; */
     border: dashed red;
+
+    height: 4rem;
+    width: 10rem;
 }
 
 #previous-content h2 {
