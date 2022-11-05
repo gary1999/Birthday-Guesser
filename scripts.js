@@ -7,8 +7,8 @@ let state; //Before or After
 let previousGuessList = [];
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById("before-button").addEventListener('click', beforeGuess);
-    document.getElementById("after-button").addEventListener('click', afterGuess);
+    // document.getElementById("before-button").addEventListener('click', beforeGuess);
+    // document.getElementById("after-button").addEventListener('click', afterGuess);
     document.getElementById("reset-button").addEventListener('click', initialise);
     document.getElementById("undo-button").addEventListener('click', undo);
 });
@@ -20,8 +20,11 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 ];
 
 
+
 const generateRandomGuess = (startDate, endDate) => {
-    randomDate = new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()));
+    randomDate = (
+        new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()))
+    );
     previousGuessList.push(randomDate);
 
     console.log(previousGuessList);
@@ -34,7 +37,7 @@ const generateRandomGuess = (startDate, endDate) => {
     return (randomDate);
 }
 
-const guessDateToString = (guess) => {
+const dateToString = (guess) => {
     let month = (monthNames[guess.getMonth()]);
     let date = (guess.getDate());
     let year = (guess.getFullYear());
@@ -44,21 +47,22 @@ const guessDateToString = (guess) => {
 
 const initialDisplay = (initialGuess) => {
 
+    let testTime = new Date();
 
-    console.log(startDate);
+    console.log(Date(testTime.getTime() + (testTime.getDate + 3)));
 
-    let guessString = guessDateToString(initialGuess);
+    let guessString = dateToString(initialGuess);
 
-    let exist = document.getElementById('birthdayDisplayID');
-    if (exist === null) {
-        const birthdayDisplay = document.createElement('div');
-        birthdayDisplay.classList = 'birthdayDisplay';
-        birthdayDisplay.id = 'birthdayDisplayID';
-        birthdayDisplay.innerHTML = guessString;
-        document.getElementById("birthdayGuess").appendChild(birthdayDisplay);
-    } else {
-        document.getElementById('birthdayDisplayID').innerHTML = guessString;
-    }
+    // let exist = document.getElementById('birthdayDisplayID');
+    // if (exist === null) {
+    //     const birthdayDisplay = document.createElement('div');
+    //     birthdayDisplay.classList = 'birthdayDisplay';
+    //     birthdayDisplay.id = 'birthdayDisplayID';
+    //     birthdayDisplay.innerHTML = guessString;
+    //     document.getElementById("birthdayGuess").appendChild(birthdayDisplay);
+    // } else {
+    //     document.getElementById('birthdayDisplayID').innerHTML = guessString;
+    // }
 }
 
 const displayGuesses = (guessList) => {
@@ -69,7 +73,7 @@ const displayGuesses = (guessList) => {
 
     for (let i = 1; i < guessList.length; i++) {
         let dateInList = guessList[i];
-        let guessString = guessDateToString(dateInList);
+        let guessString = dateToString(dateInList);
         const guessDisplayDiv = document.createElement('div');
         guessDisplayDiv.id = `previousGuess${i + 1}`;
         guessDisplayDiv.innerHTML = guessString;

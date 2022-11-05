@@ -5,6 +5,23 @@
     list-style: none;
     text-decoration: none;
     scroll-behavior: smooth;
+    color: white;
+}
+
+body {
+    background-color: rgb(39, 37, 37);
+}
+
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: black;
+}
+
+button:hover {
+    background-color: rgb(29, 26, 26);
 }
 
 #title {

@@ -18,12 +18,15 @@
 
         <div id="title">
             <h1>BIRTHDAY GUESSER</h1>
-            <h2>(But you have to tell it how close you are)</h2>
+            <h2>(But you have to tell it how close it is)</h2>
             <h2 id="guesses-made">Total Guesses: <span id="counter"></span></h2>
             <div id=button-container>
-
                 <button type="button" id="reset-button" disabled>Reset</button>
                 <button type="button" id="undo-button" disabled>Undo</button>
+            </div>
+            <div>
+                <button type="button" id="submit-button">Submit Birthday</button>
+
             </div>
 
         </div>
@@ -32,9 +35,34 @@
         <div id="content">
             <div id="content-container">
 
-                <button type="button" id="before-button">Before</button>
+                <div id="month-container">
+                    <button type="button" id="month-before-button">Before</button>
+                    <span id="month-guess">
+                        Placeholder
+                    </span>
+                    <button type="button" id="month-after-button">After</button>
+                </div>
+
+                <div id="day-container">
+                    <button type="button" id="day-before-button">Before</button>
+                    <span id="day-guess">
+                        Placeholder
+                    </span>
+                    <button type="button" id="day-after-button">After</button>
+                </div>
+
+                <div id="year-container">
+                    <button type="button" id="year-before-button">Before</button>
+                    <div id="year-guess">
+                        <span id="month-guess">
+                            Placeholder
+                        </span>
+                    </div>
+                    <button type="button" id="year-after-button">After</button>
+                </div>
+                <!-- <button type="button" id="before-button">Before</button>
                 <div id="birthdayGuess"></div>
-                <button type="button" id="after-button">After</button>
+                <button type="button" id="after-button">After</button> -->
 
             </div>
         </div>
