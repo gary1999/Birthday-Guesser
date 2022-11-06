@@ -13,6 +13,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("undo-button").addEventListener('click', undo);
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById("month-before-button").addEventListener('click', initialise);
+    document.getElementById("day-before-button").addEventListener('click', undo);
+    document.getElementById("year-before-button").addEventListener('click', undo);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById("month-after-button").addEventListener('click', initialise);
+    document.getElementById("day-after-button").addEventListener('click', undo);
+    document.getElementById("year-after-button").addEventListener('click', undo);
+});
+
 const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -45,13 +57,33 @@ const dateToString = (guess) => {
     return (`${month} ${date} ${year} (${day})`);
 }
 
+const before = (buttonName) => {
+
+    switch (buttonName) {
+        case 'month-before-button':
+            break;
+        case 'day-before-button':
+            break;
+        case 'year-before-button':
+            break;
+        default:
+            console.log('default');
+    }
+
+}
+
+
 const initialDisplay = (initialGuess) => {
 
-    let testTime = new Date();
+    // console.log(initialGuess);
+    // console.log(initialGuess.getDate());
+    // console.log(dayNames[initialGuess.getDay()]);
+    // console.log(monthNames[initialGuess.getMonth()]);
+    // console.log(initialGuess.getFullYear());
 
-    console.log(Date(testTime.getTime() + (testTime.getDate + 3)));
-
-    let guessString = dateToString(initialGuess);
+    document.getElementById("month-guess").innerHTML = (monthNames[initialGuess.getMonth()]);
+    document.getElementById("date-guess").innerHTML = (initialGuess.getDate());
+    document.getElementById("year-guess").innerHTML = (initialGuess.getFullYear());
 
     // let exist = document.getElementById('birthdayDisplayID');
     // if (exist === null) {
@@ -124,12 +156,12 @@ const resetGuesses = () => {
 }
 
 const initialise = () => {
-    startDate = new Date(1998, 0, 1);
+    startDate = new Date(1920, 0, 1);
     endDate = new Date();
-    guessDate = generateRandomGuess(startDate, endDate);
+    initialGuess = generateRandomGuess(startDate, endDate);
     totalGuesses = 0;
     updateGuesses();
-    initialDisplay(randomDate);
+    initialDisplay(initialGuess);
 
 }
 
