@@ -1,11 +1,3 @@
-let endDate;
-let startDate;
-let guessDate;
-let totalGuesses;
-let randomDate;
-let state; //Before or After
-let previousGuessList = [];
-
 document.addEventListener('DOMContentLoaded', () => {
     // document.getElementById("before-button").addEventListener('click', beforeGuess);
     // document.getElementById("after-button").addEventListener('click', afterGuess);
@@ -14,16 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById("month-before-button").addEventListener('click', initialise);
-    document.getElementById("day-before-button").addEventListener('click', undo);
-    document.getElementById("year-before-button").addEventListener('click', undo);
+    // document.getElementById("month-before-button").addEventListener('click', test);
+    // document.getElementById("day-before-button").addEventListener('click', test);
+    // document.getElementById("year-before-button").addEventListener('click', test);
+    // document.getElementById("month-after-button").addEventListener('click', test);
+    // document.getElementById("day-after-button").addEventListener('click', test);
+    // document.getElementById("year-after-button").addEventListener('click', test);
+    elements = document.getElementsByClassName("guess-button");
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].addEventListener('click', test);
+    }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById("month-after-button").addEventListener('click', initialise);
-    document.getElementById("day-after-button").addEventListener('click', undo);
-    document.getElementById("year-after-button").addEventListener('click', undo);
-});
 
 const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -31,21 +25,55 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
 
+let totalGuesses;
+let previousGuessList = [];
+
+let currentGuess;
+let currentMonth;
+let currentDate;
+let currentYear;
+
+
+const test = (e) => {
+    switch (e.target.id) {
+        case 'month-before-button':
+            console.log(currentMonth);
+            break;
+        case 'day-before-button':
+            console.log(currentDate);
+            break;
+        case 'year-before-button':
+            console.log(currentYear);
+            break;
+        case 'month-after-button':
+            console.log(currentMonth);
+            break;
+        case 'day-after-button':
+            console.log(currentDate);
+            break;
+        case 'year-after-button':
+            console.log(currentYear);
+            break;
+        default:
+            console.log('default');
+    }
+    console.log(currentGuess);
+}
 
 
 const generateRandomGuess = (startDate, endDate) => {
     randomDate = (
         new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()))
     );
-    previousGuessList.push(randomDate);
+    // previousGuessList.push(randomDate);
 
-    console.log(previousGuessList);
+    // console.log(previousGuessList);
 
-    if (previousGuessList.length > 10) {
-        previousGuessList.shift();
-    }
+    // if (previousGuessList.length > 10) {
+    //     previousGuessList.shift();
+    // }
 
-    displayGuesses(previousGuessList);
+    // displayGuesses(previousGuessList);
     return (randomDate);
 }
 
@@ -57,63 +85,38 @@ const dateToString = (guess) => {
     return (`${month} ${date} ${year} (${day})`);
 }
 
-const before = (buttonName) => {
-
-    switch (buttonName) {
-        case 'month-before-button':
-            break;
-        case 'day-before-button':
-            break;
-        case 'year-before-button':
-            break;
-        default:
-            console.log('default');
-    }
-
-}
-
 
 const initialDisplay = (initialGuess) => {
 
-    // console.log(initialGuess);
-    // console.log(initialGuess.getDate());
-    // console.log(dayNames[initialGuess.getDay()]);
-    // console.log(monthNames[initialGuess.getMonth()]);
-    // console.log(initialGuess.getFullYear());
+    currentMonth = monthNames[initialGuess.getMonth()];
+    currentDate = initialGuess.getDate();
+    currentYear = initialGuess.getFullYear();
 
-    document.getElementById("month-guess").innerHTML = (monthNames[initialGuess.getMonth()]);
-    document.getElementById("date-guess").innerHTML = (initialGuess.getDate());
-    document.getElementById("year-guess").innerHTML = (initialGuess.getFullYear());
+    document.getElementById("month-guess").innerHTML = currentMonth;
+    document.getElementById("date-guess").innerHTML = currentDate;
+    document.getElementById("year-guess").innerHTML = currentYear;
 
-    // let exist = document.getElementById('birthdayDisplayID');
-    // if (exist === null) {
-    //     const birthdayDisplay = document.createElement('div');
-    //     birthdayDisplay.classList = 'birthdayDisplay';
-    //     birthdayDisplay.id = 'birthdayDisplayID';
-    //     birthdayDisplay.innerHTML = guessString;
-    //     document.getElementById("birthdayGuess").appendChild(birthdayDisplay);
-    // } else {
-    //     document.getElementById('birthdayDisplayID').innerHTML = guessString;
-    // }
 }
 
+
+
 const displayGuesses = (guessList) => {
-    document.getElementById("previous-guess-list").innerHTML = "";
-    guessList.reverse();
+    // document.getElementById("previous-guess-list").innerHTML = "";
+    // guessList.reverse();
 
-    initialDisplay(guessList[0]);
+    // initialDisplay(guessList[0]);
 
-    for (let i = 1; i < guessList.length; i++) {
-        let dateInList = guessList[i];
-        let guessString = dateToString(dateInList);
-        const guessDisplayDiv = document.createElement('div');
-        guessDisplayDiv.id = `previousGuess${i + 1}`;
-        guessDisplayDiv.innerHTML = guessString;
-        guessDisplayDiv.style.opacity = `0.${10 - i - 1}`
-        document.getElementById("previous-guess-list").appendChild(guessDisplayDiv);
-    }
-    guessList.reverse();
-    updateGuesses();
+    // for (let i = 1; i < guessList.length; i++) {
+    //     let dateInList = guessList[i];
+    //     let guessString = dateToString(dateInList);
+    //     const guessDisplayDiv = document.createElement('div');
+    //     guessDisplayDiv.id = `previousGuess${i + 1}`;
+    //     guessDisplayDiv.innerHTML = guessString;
+    //     guessDisplayDiv.style.opacity = `0.${10 - i - 1}`
+    //     document.getElementById("previous-guess-list").appendChild(guessDisplayDiv);
+    // }
+    // guessList.reverse();
+    // updateGuesses();
 }
 
 const beforeGuess = () => {
@@ -151,14 +154,11 @@ const updateGuesses = () => {
 
 }
 
-const resetGuesses = () => {
-
-}
-
 const initialise = () => {
     startDate = new Date(1920, 0, 1);
     endDate = new Date();
     initialGuess = generateRandomGuess(startDate, endDate);
+    currentGuess = initialGuess;
     totalGuesses = 0;
     updateGuesses();
     initialDisplay(initialGuess);
@@ -166,4 +166,6 @@ const initialise = () => {
 }
 
 initialise();
+
+// console.log(`the initial guess is ${initialGuess}`);
 
