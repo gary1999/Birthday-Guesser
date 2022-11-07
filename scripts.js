@@ -78,8 +78,11 @@ const test = (e) => {
             if (days31.includes(currentMonth)) {
                 newDayGuess = getRandomInt(currentDate + 1, 31);
             }
-            else {
+            else if (days30.includes(currentMonth)) {
                 newDayGuess = getRandomInt(currentDate + 1, 30);
+            }
+            else {
+                newDayGuess = getRandomInt(currentDate + 1, 28)
             }
 
             currentGuess.setDate(newDayGuess);
