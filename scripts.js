@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // document.getElementById("after-button").addEventListener('click', afterGuess);
     document.getElementById("reset-button").addEventListener('click', initialise);
     document.getElementById("undo-button").addEventListener('click', undo);
+    document.getElementById("submit-button").addEventListener('click', submit);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -37,6 +38,8 @@ function getRandomInt(min, max) {
 let totalGuesses;
 let previousGuessList = [];
 
+let today = new Date();
+
 let currentGuess;
 let currentMonth;
 let currentDate;
@@ -44,37 +47,30 @@ let currentYear;
 
 
 const test = (e) => {
-    console.log(currentGuess);
-
     switch (e.target.id) {
         case 'month-before-button':
             newMonthGuess = getRandomInt(0, currentMonth);
             currentGuess.setMonth(newMonthGuess);
             display(currentGuess);
             break;
-
         case 'day-before-button':
-            // console.log(`before: ${currentDate}`)
             newDayGuess = getRandomInt(1, currentDate);
             currentGuess.setDate(newDayGuess);
-            // console.log(`after: ${newDayGuess}`)
             display(currentGuess);
             break;
-
         case 'year-before-button':
-            console.log(currentYear);
+            newYearGuess = getRandomInt(1900, currentYear);
+            currentGuess.setYear(newYearGuess);
+            display(currentGuess);
             break;
-
         case 'month-after-button':
             //Add one to current value because it can roll the same number if not
             newMonthGuess = getRandomInt(currentMonth + 1, 11);
             currentGuess.setMonth(newMonthGuess);
             display(currentGuess);
             break;
-
         case 'day-after-button':
             //Add one to current value because it can roll the same number if not
-
             if (days31.includes(currentMonth)) {
                 newDayGuess = getRandomInt(currentDate + 1, 31);
             }
@@ -82,23 +78,27 @@ const test = (e) => {
                 newDayGuess = getRandomInt(currentDate + 1, 30);
             }
             else {
-                newDayGuess = getRandomInt(currentDate + 1, 28)
+                if (currentYear % 4 == 0) {
+                    newDayGuess = getRandomInt(currentDate + 1, 29);
+                }
+                else {
+                    newDayGuess = getRandomInt(currentDate + 1, 28);
+                }
             }
-
             currentGuess.setDate(newDayGuess);
             display(currentGuess);
             break;
-
         case 'year-after-button':
-            console.log(currentYear);
+            //Add one to current value because it can roll the same number if not
+            newYearGuess = getRandomInt(currentYear + 1, today.getFullYear());
+            currentGuess.setYear(newYearGuess);
+            display(currentGuess);
             break;
-
         default:
             console.log('default');
     }
 
 }
-
 
 const generateRandomGuess = (startDate, endDate) => {
     randomDate = (
@@ -136,7 +136,6 @@ const display = (guess) => {
     document.getElementById("year-guess").innerHTML = currentYear;
 
 }
-
 
 const displayGuesses = (guessList) => {
     // document.getElementById("previous-guess-list").innerHTML = "";
@@ -183,6 +182,10 @@ const undo = () => {
     console.log(previousGuessList);
     previousGuessList.reverse();
     displayGuesses(previousGuessList);
+}
+
+const submit = () => {
+    console.log("test")
 }
 
 const updateGuessCounter = () => {
