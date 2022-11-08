@@ -35,9 +35,9 @@ let currentMonth;
 let currentDate;
 let currentYear;
 
-let previousMonthGuessList = [];
-let previousDateGuessList = [];
-let previousYearGuessList = [];
+let previousMonthGuessList;
+let previousDateGuessList;
+let previousYearGuessList;
 
 
 const buttonClick = (e) => {
@@ -46,9 +46,14 @@ const buttonClick = (e) => {
             //Add month to the previous guess list before changing it
             previousMonthGuessList.push(monthNames[currentMonth]);
             displayPrevious(previousMonthGuessList, 'month');
-
             newMonthGuess = getRandomInt(0, currentMonth);
             currentGuess.setMonth(newMonthGuess);
+            if (newMonthGuess == 0) {
+                document.getElementById(e.target.id).disabled = true;
+            }
+            else {
+                document.getElementById('month-after-button').disabled = false;
+            }
             display(currentGuess);
             break;
         case 'day-before-button':
@@ -57,6 +62,14 @@ const buttonClick = (e) => {
             displayPrevious(previousDateGuessList, 'date');
             newDayGuess = getRandomInt(1, currentDate);
             currentGuess.setDate(newDayGuess);
+
+            if (newDayGuess == 1) {
+                document.getElementById(e.target.id).disabled = true;
+            }
+            else {
+                document.getElementById('day-after-button').disabled = false;
+            }
+
             display(currentGuess);
             break;
         case 'year-before-button':
@@ -66,6 +79,12 @@ const buttonClick = (e) => {
             newYearGuess = getRandomInt(1920, currentYear);
             currentGuess.setYear(newYearGuess);
             display(currentGuess);
+            if (newYearGuess == 1920) {
+                document.getElementById(e.target.id).disabled = true;
+            }
+            else {
+                document.getElementById('year-after-button').disabled = false;
+            }
             break;
         case 'month-after-button':
             //Add month to the previous guess list before changing it
@@ -74,6 +93,14 @@ const buttonClick = (e) => {
             //Add one to current value because it can roll the same number if not
             newMonthGuess = getRandomInt(currentMonth + 1, 11);
             currentGuess.setMonth(newMonthGuess);
+
+            if (newMonthGuess == 11) {
+                document.getElementById(e.target.id).disabled = true;
+            }
+            else {
+                document.getElementById('month-before-button').disabled = false;
+            }
+
             display(currentGuess);
             break;
         case 'day-after-button':
@@ -84,22 +111,46 @@ const buttonClick = (e) => {
                 //Add one to current value because it can roll the same number if not
                 //Account for all months that have 31 days
                 newDayGuess = getRandomInt(currentDate + 1, 31);
+                if (newDayGuess == 31) {
+                    document.getElementById(e.target.id).disabled = true;
+                }
+                else {
+                    document.getElementById('day-before-button').disabled = false;
+                }
             }
             else if (days30.includes(currentMonth)) {
                 //Add one to current value because it can roll the same number if not
                 //Account for all months that have 30 days
                 newDayGuess = getRandomInt(currentDate + 1, 30);
+                if (newDayGuess == 30) {
+                    document.getElementById(e.target.id).disabled = true;
+                }
+                else {
+                    document.getElementById('day-before-button').disabled = false;
+                }
             }
             else {
                 if (currentYear % 4 == 0) {
                     //Add one to current value because it can roll the same number if not
                     //Account for leap year February
                     newDayGuess = getRandomInt(currentDate + 1, 29);
+                    if (newDayGuess == 29) {
+                        document.getElementById(e.target.id).disabled = true;
+                    }
+                    else {
+                        document.getElementById('day-before-button').disabled = false;
+                    }
                 }
                 else {
                     //Non-leap year February
                     //Add one to current value because it can roll the same number if not
                     newDayGuess = getRandomInt(currentDate + 1, 28);
+                    if (newDayGuess == 28) {
+                        document.getElementById(e.target.id).disabled = true;
+                    }
+                    else {
+                        document.getElementById('day-before-button').disabled = false;
+                    }
                 }
             }
             currentGuess.setDate(newDayGuess);
@@ -111,6 +162,12 @@ const buttonClick = (e) => {
             displayPrevious(previousYearGuessList, 'year');
             //Add one to current value because it can roll the same number if not
             newYearGuess = getRandomInt(currentYear + 1, today.getFullYear());
+            if (newYearGuess == today.getFullYear()) {
+                document.getElementById(e.target.id).disabled = true;
+            }
+            else {
+                document.getElementById('year-before-button').disabled = false;
+            }
             currentGuess.setYear(newYearGuess);
             display(currentGuess);
             break;
@@ -143,12 +200,12 @@ const dateToString = (guess) => {
     let month = (monthNames[guess.getMonth()]);
     let date = (guess.getDate());
     let year = (guess.getFullYear());
-    let day = (dayNames[guess.getDay()]);
-    return (`${month} ${date} ${year} (${day})`);
+    // let day = (dayNames[guess.getDay()]);
+    return (`${month} ${date} ${year}`);
+    // return (`${month} ${date} ${year} (${day})`);
 }
 
 const display = (guess) => {
-
     currentMonth = guess.getMonth();
     currentDate = guess.getDate();
     currentYear = guess.getFullYear();
@@ -159,25 +216,48 @@ const display = (guess) => {
 
 }
 
-
 const submit = () => {
-    console.log("test")
+    elements = document.getElementsByClassName("guess-button");
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].disabled = true;
+    }
+
+    console.log(currentGuess);
+
+    const finalGuess = document.createElement('h3');
+    finalGuess.id = `finalGuess`;
+    finalGuess.innerHTML = `The bot has determined that your birthday is on ${dateToString(currentGuess)}`;
+    document.getElementById('title').appendChild(finalGuess);
+
 }
 
-const updateGuessCounter = () => {
-    totalGuesses += 1;
-    const counterDisplay = document.getElementById("counter");
-    counterDisplay.innerHTML = totalGuesses;
-}
 
 const initialise = () => {
-    totalGuesses = 0;
+
+    previousMonthGuessList = [];
+    previousDateGuessList = [];
+    previousYearGuessList = [];
+
+    elements = document.getElementsByClassName('previous-guess');
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].innerHTML = "";
+    }
+
+    let finalGuess = document.getElementById('finalGuess');
+    if (finalGuess) {
+        finalGuess.remove();
+    }
+
+    elements = document.getElementsByClassName("guess-button");
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].disabled = false;
+    }
+
     startDate = new Date(1920, 0, 1);
     endDate = new Date();
     currentGuess = (
         new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()))
     );
-    updateGuessCounter();
     display(currentGuess);
 }
 

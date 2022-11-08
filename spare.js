@@ -46,6 +46,12 @@ const undo = () => {
     displayGuesses(previousGuessList);
 }
 
+const updateGuessCounter = () => {
+    totalGuesses += 1;
+    const counterDisplay = document.getElementById("counter");
+    counterDisplay.innerHTML = totalGuesses;
+}
+
 
 const generateRandomGuess = (startDate, endDate) => {
     randomDate = (
