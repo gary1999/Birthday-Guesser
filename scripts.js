@@ -43,14 +43,16 @@ let previousYearGuessList = [];
 const buttonClick = (e) => {
     switch (e.target.id) {
         case 'month-before-button':
-            //Month before change
+            //Add month to the previous guess list before changing it
             previousMonthGuessList.push(monthNames[currentMonth]);
             displayPrevious(previousMonthGuessList, 'month');
+
             newMonthGuess = getRandomInt(0, currentMonth);
             currentGuess.setMonth(newMonthGuess);
             display(currentGuess);
             break;
         case 'day-before-button':
+            //Add date to the previous guess list before changing it
             previousDateGuessList.push(currentDate);
             displayPrevious(previousDateGuessList, 'date');
             newDayGuess = getRandomInt(1, currentDate);
@@ -58,6 +60,7 @@ const buttonClick = (e) => {
             display(currentGuess);
             break;
         case 'year-before-button':
+            //Add year to the previous guess list before changing it
             previousYearGuessList.push(currentYear);
             displayPrevious(previousYearGuessList, 'year');
             newYearGuess = getRandomInt(1920, currentYear);
@@ -65,28 +68,37 @@ const buttonClick = (e) => {
             display(currentGuess);
             break;
         case 'month-after-button':
-            //Add one to current value because it can roll the same number if not
+            //Add month to the previous guess list before changing it
             previousMonthGuessList.push(monthNames[currentMonth]);
             displayPrevious(previousMonthGuessList, 'month');
+            //Add one to current value because it can roll the same number if not
             newMonthGuess = getRandomInt(currentMonth + 1, 11);
             currentGuess.setMonth(newMonthGuess);
             display(currentGuess);
             break;
         case 'day-after-button':
+            //Add date to the previous guess list before changing it
             previousDateGuessList.push(currentDate);
             displayPrevious(previousDateGuessList, 'date');
-            //Add one to current value because it can roll the same number if not
             if (days31.includes(currentMonth)) {
+                //Add one to current value because it can roll the same number if not
+                //Account for all months that have 31 days
                 newDayGuess = getRandomInt(currentDate + 1, 31);
             }
             else if (days30.includes(currentMonth)) {
+                //Add one to current value because it can roll the same number if not
+                //Account for all months that have 30 days
                 newDayGuess = getRandomInt(currentDate + 1, 30);
             }
             else {
                 if (currentYear % 4 == 0) {
+                    //Add one to current value because it can roll the same number if not
+                    //Account for leap year February
                     newDayGuess = getRandomInt(currentDate + 1, 29);
                 }
                 else {
+                    //Non-leap year February
+                    //Add one to current value because it can roll the same number if not
                     newDayGuess = getRandomInt(currentDate + 1, 28);
                 }
             }
@@ -94,6 +106,7 @@ const buttonClick = (e) => {
             display(currentGuess);
             break;
         case 'year-after-button':
+            //Add year to the previous guess list before changing it
             previousYearGuessList.push(currentYear);
             displayPrevious(previousYearGuessList, 'year');
             //Add one to current value because it can roll the same number if not
@@ -109,7 +122,6 @@ const buttonClick = (e) => {
 
 const displayPrevious = (previousGuessList, placement) => {
     console.log(previousGuessList[0]);
-    //Only changes in this function
     if (previousGuessList.length > 10) {
         previousGuessList.shift();
     }
@@ -124,6 +136,7 @@ const displayPrevious = (previousGuessList, placement) => {
         previousGuessSpan.style.opacity = `0.${10 - i - 1}`;
         document.getElementById(`previous-${placement}-guess-list`).appendChild(previousGuessSpan);
     }
+    previousGuessList.reverse();
 }
 
 const dateToString = (guess) => {
