@@ -22,7 +22,7 @@
             <h2 id="guesses-made">Total Guesses: <span id="counter"></span></h2>
             <div id=button-container>
                 <button type="button" id="reset-button">Reset</button>
-                <button type="button" id="undo-button" disabled>Undo</button>
+                <!-- <button type="button" id="undo-button" disabled>Undo</button> -->
             </div>
             <div>
                 <button type="button" id="submit-button">Submit Birthday</button>
@@ -50,17 +50,21 @@
                     <span id="year-guess" class="guess-display"></span>
                     <button type="button" id="year-after-button" class="guess-button">After</button>
                 </div>
-                <!-- <button type="button" id="before-button">Before</button>
-                <div id="birthdayGuess"></div>
-                <button type="button" id="after-button">After</button> -->
-
             </div>
         </div>
 
         <div id="previous-content">
             <h2>Previous Guesses:</h2>
-            <div id="previous-guess-list">
-
+            <div id="previous-guess-container">
+                <div id="previous-month-guess-list" class="previous-guess">
+                    <!-- <span id="previous-month-guess" class="previous-month-guess-display"></span> -->
+                </div>
+                <div id="previous-date-guess-list" class="previous-guess">
+                    <!-- <span id="previous-date-guess" class="previous-year-date-display"></span> -->
+                </div>
+                <div id="previous-year-guess-list" class="previous-guess">
+                    <!-- <span id="previous-year-guess" class="previous-year-guess-display"></span> -->
+                </div>
             </div>
         </div>
     </body>
